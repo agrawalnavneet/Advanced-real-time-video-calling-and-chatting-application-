@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Creative Colorlib SignUp Form</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+
+<link href="css/register.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="css/style.css" />
+
+<link href="//fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i" rel="stylesheet">
+
+</head>
+<body>
+	<div class="main-w3layouts wrapper registration-form">
+		<h1 style="margin-top: -50px;">SignUp Form</h1>
+		<div class="main-agileinfo">
+			<div class="agileits-top">
+				<form action="/register" method="post" class="data">
+					<input class="text" type="text" id="username" name="username" placeholder="Username" required>
+					<input class="text email" type="email" id="email" name="email" placeholder="Email" required>
+					<input class="text" type="password" id="password" name="password" placeholder="Password" required>
+					<input class="text w3lpass" type="password" id="cfpassword" name="confirmpassword" placeholder="Confirm Password" required>
+					<div class="wthree-text">
+						<label class="anim">
+							<input type="checkbox" class="checkbox" style="background: linear-gradient(120deg,rgb(75, 240, 160), #ff6699);" required>
+							<span>I Agree To The Terms & Conditions</span>
+						</label>
+						<div class="clear"> </div>
+					</div>
+					<button type="submit" style="background: linear-gradient(120deg,green #ff6699);border:1px solid hsl(95, 63%, 43%)" value="SIGNUP">Signup</button>
+				</form>
+				<p>Already have an Account? <a href="./login"> Login Now!</a></p>
+			</div>
+		</div>
+	</div>
+	<script>
+		document.querySelector(".data").addEventListener('submit',(e)=>{
+			e.preventDefault();
+			const username=document.getElementById('username').value;
+			const email=document.getElementById('email').value;
+			const pasword=document.getElementById('password').value;
+			const cfpassword=document.getElementById('cfpassword').value;
+			fetch('/register',{
+				method:'POST',
+				headers:{
+					'Content-Type':"application/json"
+				},
+				body:JSON.stringify({username,email,password,cpassword:cfpassword})
+			})
+			.then((response)=>{
+				if(response.ok){
+					localStorage.setItem('username',username);
+					alert("Registration Successfull")
+					window.location.href="./index.html"
+				}
+			}).catch((error)=>{
+				console.log(error);
+			})
+			
+		})
+	</script>
+</body>
+</html>
